@@ -1,0 +1,30 @@
+// python3 -m grpc_tools.protoc raft.proto --proto_path=. --python_out=. --grpc_python_out=.
+
+syntax = "proto3";
+
+service Server {
+    rpc RequestVote(PeerMessage) returns (MessageResponse);
+    
+    rpc AppendEntries(PeerMessage) returns (MessageResponse);
+    
+    rpc GetLeader(EmptyMessage) returns (MessageResponse);
+    
+    rpc Suspend(Message) returns (MessageResponse);
+}
+
+message EmptyMessage { 
+}
+
+message Message {
+    string message = 1;
+}
+
+message PeerMessage {
+    int32 termNumber = 1;
+    string message = 2;
+}
+
+message MessageResponse {
+    bool received = 1;
+    string message = 2;
+}

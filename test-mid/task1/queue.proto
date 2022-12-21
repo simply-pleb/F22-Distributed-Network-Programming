@@ -1,0 +1,24 @@
+// python3 -m grpc_tools.protoc queue.proto --proto_path=. --python_out=. --grpc_python_out=.
+
+syntax = "proto3";
+
+service Server {
+    rpc put(Message) returns (MessageResponse);
+ 
+    rpc peek(EmptyMessage) returns (MessageResponse);
+ 
+    rpc pop(EmptyMessage) returns (MessageResponse);
+ 
+    rpc size(EmptyMessage) returns (MessageResponse);
+}
+
+message EmptyMessage { }
+
+message Message {
+    string message = 1;
+}
+
+message MessageResponse {
+    bool received = 1;
+    string message = 2;
+}

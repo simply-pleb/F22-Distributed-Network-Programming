@@ -1,0 +1,38 @@
+// python3 -m grpc_tools.protoc chord.proto --proto_path=. --python_out=. --grpc_python_out=.
+
+syntax = "proto3";
+
+service Registry {
+    rpc register(Message) returns (MessageResponse);
+
+    rpc deregister(Message) returns (MessageResponse);
+
+    rpc populate_finger_table(Message) returns (MessageResponse);
+
+    rpc get_chord_info(EmptyMessage) returns (MessageResponse);
+}
+
+service Node {
+    rpc get_finger_table(EmptyMessage) returns (MessageResponse);
+
+    rpc save(Message) returns (MessageResponse);
+
+    rpc remove(Message) returns (MessageResponse);
+
+    rpc find(Message) returns (MessageResponse);
+
+    rpc quit(EmptyMessage) returns (MessageResponse);
+
+    rpc get_node_id(EmptyMessage) returns (MessageResponse);
+}
+
+message EmptyMessage { }
+
+message Message {
+    string message = 1;
+}
+
+message MessageResponse {
+    bool received = 1;
+    string message = 2;
+}

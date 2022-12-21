@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+service SimpleService {
+    rpc GetServerResponse(Message) returns (MessageResponse); 
+
+    rpc ReverseString(Message) returns (MessageResponse);
+
+    rpc SplitString(Message) returns (MessageResponse);
+
+    rpc IsPrime(Message) returns (MessageResponse);
+}
+
+message Message {
+    string message = 1;
+}
+
+message MessageResponse {
+    string message = 1;
+    bool received = 2;
+}
