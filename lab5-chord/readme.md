@@ -1,3 +1,5 @@
+implemented a simplified version of the chord distributed hash table using grpc and protobuf.
+
 ## registry
 
 Registry is responsible for registering and deregistering the nodes.
